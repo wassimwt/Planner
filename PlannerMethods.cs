@@ -8,7 +8,6 @@ namespace PlannerPrototype
 {
     class PlannerMethods
     {
-        // Might need to add ref to planner later, need to test.
        public static void AddTask(Planner planner)
         {
 
