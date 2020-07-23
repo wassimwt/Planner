@@ -1,24 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
 
 namespace PlannerPrototype
 {
     class Program
     {
-
-
         static void Main(string[] args)
         {
-
-            var plannerList = new List<Object>();
-            // Initialize input variable
-            int input;
             var toQuit = false;
-            var planner = new Planner();
-            PlannerMethods.DeserializeDict(planner);
+            var planner = Planner.Load();
 
             // Ask the user what task they want to do
             while (!toQuit)
@@ -26,30 +15,29 @@ namespace PlannerPrototype
                 Console.WriteLine("Do you want to:");
                 Console.WriteLine("1: Add project");
                 Console.WriteLine("2: Show to-do list");
-                Console.WriteLine("3: Clear to do list");
+                Console.WriteLine("3: Clear to-do list");
                 Console.WriteLine("4: Exit");
 
                 // Register user input
-                input = Convert.ToInt32(Console.ReadLine());
+                int.TryParse(Console.ReadLine(), out var input);
 
-                var newToDoList = new Dictionary<string, TimeSpan>();
-                // Add a project if the input is 1
                 switch (input)
                 {
+                    // Add a project if the input is 1
                     case 1:
-                        PlannerMethods.AddTask(planner);
+                        planner.AddTask();
                         Console.WriteLine("=============");
                         break;
 
                     // Show to-do list if the input is 2
                     case 2:
-                        PlannerMethods.ShowToDoList(planner);
+                        planner.ShowToDoList();
                         Console.WriteLine("=============");
                         break;
 
                     // Clear to-do list if the input is 3
                     case 3:
-                        PlannerMethods.ClearList(planner);
+                        planner.ClearList();
                         Console.WriteLine("=============");
                         break;
 
@@ -64,9 +52,8 @@ namespace PlannerPrototype
                         Console.WriteLine("=============");
                         break;
                 }
-              // Keep looping through the programm
+                // Keep looping through the programm
             }
-
         }
     }
 }
